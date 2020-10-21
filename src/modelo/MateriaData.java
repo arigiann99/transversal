@@ -10,10 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.mariadb.jdbc.internal.util.dao.PrepareResult;
+
 
 
 public class MateriaData {
@@ -48,13 +46,14 @@ public class MateriaData {
     
     public void actualizarMateria(Materia materia){
         try {
-            String sql = " UPDATE `materia` SET nombre=?, WHERE id=?";
+            String sql = " UPDATE `materia` SET nombre=? WHERE idMateria=?";
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, materia.getNombreMateria());
             statement.setInt(2, materia.getIdMateria());
             
             statement.executeUpdate();
-            
+         
+        statement.close();
         con.close();
             
         } catch (SQLException e) {
@@ -71,8 +70,9 @@ public class MateriaData {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            System.err.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, " No se pudo eliminar la materia");
         }
     }
     
@@ -83,17 +83,23 @@ public class MateriaData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-          
+            
+            if(rs.equals(id)){
+                materia.getNombreMateria();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo encontrar materia");
+            }
             ps.close();
             
-        } catch (SQLException ex) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+           System.err.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, " No se pudo encontrar la materia");
         }        
         return materia;       
     }
     
     public List<Materia> obtenerMaterias(){
-        Materia materia = null;
+        Materia materia = new Materia();
         List<Materia> materias = new ArrayList<>();
         String sql = "SELECT * FROM materia";
         
@@ -102,15 +108,14 @@ public class MateriaData {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombreMateria(rs.getString("nombre"));
-                
-                
+                System.out.println(materia.getNombreMateria());
                 materias.add(materia);            
             }           
-        } catch (SQLException ex) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            System.err.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se pudo listar las materias");
         }
         return materias;        
     }

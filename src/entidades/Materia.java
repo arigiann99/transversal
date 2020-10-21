@@ -20,7 +20,7 @@ public class Materia {
         this.nombreMateria = nombreMateria;
     }
 
-    public Materia(int idMateria, String nombreMateria) {
+    public Materia(String nombreMateria, int idMateria) {
         this.idMateria = idMateria;
         this.nombreMateria = nombreMateria;
     }

@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,7 +33,6 @@ public class AlumnoData {
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, alumno.getNombre());
             statement.setInt(2,alumno.getLegajo());
-            //statement.setDate(3, Date.valueOf(alumno.getFn_alumno()));
             statement.setBoolean(3, alumno.isActivo());
             
             statement.executeUpdate();
@@ -45,7 +42,6 @@ public class AlumnoData {
             if(rs.next()){
                 alumno.setIdAlumno(rs.getInt(1));
             } else {
-                //System.out.println("No se pudo obtener el id del alumno");
                 JOptionPane.showMessageDialog(null, "No se pudo obtener el id del alumno");
             }
         con.close();
@@ -58,12 +54,12 @@ public class AlumnoData {
     }
     
     public void actualizarAlumno(Alumno alumno){
+        
         try {
-            String sql = " UPDATE `alumno` SET nombre=? , legajo=?, activO=? WHERE id=?";
+            String sql = " UPDATE `alumno` SET nombre=? , legajo=?, activo=? WHERE idAlumno=?";
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, alumno.getNombre());
             statement.setInt(2,alumno.getLegajo());
-           //statement.setDate(3, Date.valueOf(alumno.getFn_alumno()));
             statement.setBoolean(3, alumno.isActivo());
             statement.setInt(4, alumno.getIdAlumno());
                     
@@ -73,7 +69,7 @@ public class AlumnoData {
             
         } catch (SQLException e) {
             System.err.print(e.getMessage());
-            JOptionPane.showMessageDialog(null, " No se pudo buscar el alumno");
+            JOptionPane.showMessageDialog(null, " No se pudo actualizar el alumno");
         }       
     }
     
@@ -85,8 +81,9 @@ public class AlumnoData {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+             System.err.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, " No se pudo eliminar el alumno");
         }
     }
     
@@ -97,11 +94,18 @@ public class AlumnoData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-          
+            
+            //alumno.setIdAlumno(rs.getInt(id));
+            rs.getString("nombre");
+            rs.getInt("legajo");
+            
+            System.out.println(alumno.getNombre()+ " " + alumno.getLegajo());
+            
             ps.close();
             
-        } catch (SQLException ex) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+             System.err.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, " No se pudo encontrar el alumno");
         }        
         return alumno;       
     }
@@ -119,12 +123,15 @@ public class AlumnoData {
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setActivo(rs.getBoolean("activo"));
-                System.out.println(alumno.getNombre());
+                alumno.setLegajo(rs.getInt("legajo"));
+                System.out.println(alumno.getNombre()+ " " + alumno.getLegajo());
                 
                 alumnos.add(alumno);            
-            }           
-        } catch (SQLException ex) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+            }    
+            ps.close();
+        } catch (SQLException e) {
+            System.err.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, " No se pudo listar los alumnos");
         }
         return alumnos;        
     }

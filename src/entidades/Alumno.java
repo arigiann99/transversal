@@ -27,7 +27,7 @@ public class Alumno {
         this.activo = activo;
     }
 
-    public Alumno(int idAlumno, String nombre, boolean activo, int legajo) {
+    public Alumno( int idAlumno, String nombre, int legajo , boolean activo) {
         this.idAlumno = idAlumno;
         this.nombre = nombre;
         this.activo = activo;

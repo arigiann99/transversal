@@ -77,8 +77,8 @@ public class CursadaData {
         try {
              
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
+            ps.setInt(1, c.getAlumno().getIdAlumno());
+            ps.setInt(2, c.getMateria().getIdMateria());
             ps.executeUpdate();
             ps.close();
             

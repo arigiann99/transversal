@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion {                 
     
-    private final String base = "universidad";                   
+    private final String base = "universidadg2";                   
     private final String url = "jdbc:mysql://localhost:3306/"+base; 
     private final String user = "root";                             
     private final String pass = "";                                 
