@@ -95,11 +95,13 @@ public class AlumnoData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
-            //alumno.setIdAlumno(rs.getInt(id));
-            rs.getString("nombre");
-            rs.getInt("legajo");
-            
-            System.out.println(alumno.getNombre()+ " " + alumno.getLegajo());
+            if(rs.next()){
+                  alumno.setIdAlumno(rs.getInt(1));
+                  alumno.setNombre(rs.getString(2));
+                  alumno.setLegajo(rs.getInt(3));
+                  alumno.setActivo(rs.getBoolean(4));
+                  System.out.println(alumno.getNombre());    
+              }  
             
             ps.close();
             

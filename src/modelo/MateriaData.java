@@ -84,11 +84,13 @@ public class MateriaData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
-            if(rs.equals(id)){
-                materia.getNombreMateria();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo encontrar materia");
-            }
+           if(rs.next()){
+                  materia.setIdMateria(rs.getInt(1));
+                  materia.setNombreMateria(rs.getString(2));
+                 
+                  System.out.println(materia.getNombreMateria());    
+              }  
+            
             ps.close();
             
         } catch (SQLException e) {

@@ -22,7 +22,7 @@ public class TestUniversidad {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Conexion c = new Conexion();
+        Conexion c = new Conexion();
         
         /*
         //ALUMNO DATA
@@ -42,11 +42,11 @@ public class TestUniversidad {
         
         //ad.borrarAlumno(18); // funciona ok
         
-        //ad.buscarAlumno(17); -> Genera error !!
+        //ad.buscarAlumno(20); // funciona ok
         
         //ad.obtenerAlumnos(); // funciona ok
-        */
         
+        */
         /*
         // MATERIA DATA
         MateriaData md = new MateriaData(c);
@@ -66,7 +66,7 @@ public class TestUniversidad {
         
         //md.borrarMateria(16); // funciona ok
         
-        //md.buscarMateria(14); -> genera error!!
+        //md.buscarMateria(14); // funciona ok
         
         //md.obtenerMaterias(); // funciona ok
         */
