@@ -22,21 +22,23 @@ public class TestUniversidad {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        /*
         Conexion c = new Conexion();
         
-        /*
+        
         //ALUMNO DATA
         AlumnoData ad = new AlumnoData(c);
         
         //ALUMNO
-        Alumno ariel = new Alumno("Ariel Giannelli", 152797, false);
-        Alumno malco = new Alumno("Malco Grosso", 152798, true);
+        Alumno ariel = new Alumno("Ariel Giannelli", 152800, true);
+        Alumno malco = new Alumno("Malco Grosso", 152801, true);
         Alumno nela = new Alumno("Marianela Garacciolo", 152799, true);
         
         //ad.guardarAlumno(ariel); 
         //ad.guardarAlumno(malco); // funciona ok
         //ad.guardarAlumno(nela);
         
+        //malco.setIdAlumno(19);
         //ariel.setIdAlumno(17);
         //ad.actualizarAlumno(ariel); // funciona ok
         
@@ -46,8 +48,8 @@ public class TestUniversidad {
         
         //ad.obtenerAlumnos(); // funciona ok
         
-        */
         /*
+        
         // MATERIA DATA
         MateriaData md = new MateriaData(c);
         
@@ -61,7 +63,7 @@ public class TestUniversidad {
         //md.guardarMateria(lab); // funciona ok
         //md.guardarMateria(web);
        
-        //mat.setIdMateria(14);
+        mat.setIdMateria(14);
         //md.actualizarMateria(mat); //funciona ok
         
         //md.borrarMateria(16); // funciona ok
@@ -69,9 +71,25 @@ public class TestUniversidad {
         //md.buscarMateria(14); // funciona ok
         
         //md.obtenerMaterias(); // funciona ok
-        */
-       
         
+       
+        // CURSADA DATA
+        CursadaData cd = new CursadaData(c);
+        
+        // CURSADA
+        Cursada curso = new Cursada(ariel, mat, 9);
+        Cursada curso2 = new Cursada(malco, mat, 5);
+        
+        //cd.guardarCalificacion(curso); // funciona ok 
+        //cd.guardarCalificacion(curso2);
+        
+        //cd.actualizarCalificacion(curso2); // funciona ok
+        
+        //cd.borrarCalificacion(curso2); //funciona ok
+        
+        //cd.buscarCalificacionAlumno(17); //funciona ok
+        //cd.buscarCalificacionMateria(15); // funciona ok
+        */
     }
     
 }
