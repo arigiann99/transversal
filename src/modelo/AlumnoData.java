@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import entidades.Alumno;
 import java.sql.Connection;
-//import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,10 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author GIANELLI
- */
+
 public class AlumnoData {
     private Connection con = null;
 
@@ -29,7 +21,7 @@ public class AlumnoData {
     
     public void guardarAlumno(Alumno alumno){
         try {
-            String sql = "INSERT INTO `alumno`(`nombre`, `legajo`, `activo`) VALUE (?,?,?) ";
+            String sql = "INSERT INTO `alumno`(`nombre_alumno`, `legajo`, `activo`) VALUE (?,?,?) ";
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, alumno.getNombre());
             statement.setInt(2,alumno.getLegajo());
@@ -56,7 +48,7 @@ public class AlumnoData {
     public void actualizarAlumno(Alumno alumno){
         
         try {
-            String sql = " UPDATE `alumno` SET nombre=? , legajo=?, activo=? WHERE idAlumno=?";
+            String sql = " UPDATE `alumno` SET nombre_alumno=? , legajo=?, activo=? WHERE id_alumno=?";
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, alumno.getNombre());
             statement.setInt(2,alumno.getLegajo());
@@ -74,7 +66,7 @@ public class AlumnoData {
     }
     
     public void borrarAlumno(int id){
-        String sql = "DELETE FROM alumno WHERE idAlumno=?";
+        String sql = "DELETE FROM alumno WHERE id_alumno=?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -89,7 +81,7 @@ public class AlumnoData {
     
     public Alumno buscarAlumno(int id){
         Alumno alumno = new Alumno();
-        String sql = "SELECT * FROM alumno WHERE idAlumno=?";
+        String sql = "SELECT * FROM alumno WHERE id_alumno=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
@@ -106,7 +98,7 @@ public class AlumnoData {
             ps.close();
             
         } catch (SQLException e) {
-             System.err.print(e.getMessage());
+            System.err.print(e.getMessage());
             JOptionPane.showMessageDialog(null, " No se pudo encontrar el alumno");
         }        
         return alumno;       
@@ -122,8 +114,8 @@ public class AlumnoData {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){             
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
-                alumno.setNombre(rs.getString("nombre"));
+                alumno.setIdAlumno(rs.getInt("id_alumno"));
+                alumno.setNombre(rs.getString("nombre_alumno"));
                 alumno.setActivo(rs.getBoolean("activo"));
                 alumno.setLegajo(rs.getInt("legajo"));
                 System.out.println(alumno.getNombre()+ " " + alumno.getLegajo());
@@ -136,7 +128,5 @@ public class AlumnoData {
             JOptionPane.showMessageDialog(null, " No se pudo listar los alumnos");
         }
         return alumnos;        
-    }
-    
-    
+    }   
 }

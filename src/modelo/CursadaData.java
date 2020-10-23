@@ -7,7 +7,9 @@ package modelo;
 
 
 
+import entidades.Alumno;
 import entidades.Cursada;
+import entidades.Materia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,8 +27,8 @@ public class CursadaData {
         con = conexion.getConection();
     }
     
-    public void guardarCalificacion(Cursada c){
-        String sql = "INSERT INTO `cursada`(`idAlumno`, `idMateria`, `calificacion`) VALUES (?,?,?)";
+    public void guardarCursada(Cursada c){
+        String sql = "INSERT INTO `cursada`(`id_alumno`, `id_materia`, `nota`) VALUES (?,?,?)";
    
         try {
             PreparedStatement st = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -53,7 +55,7 @@ public class CursadaData {
     
     public void actualizarCalificacion(Cursada c){
       
-        String sql = "UPDATE `cursada` SET `calificacion`=? WHERE `idAlumno`=? AND `idMateria`=?";
+        String sql = "UPDATE `cursada` SET `nota`=? WHERE `id_alumno`=? AND `id_materia`=?";
    
         try {
             PreparedStatement st = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -72,8 +74,8 @@ public class CursadaData {
     
     }
     
-    public void borrarCalificacion(Cursada c){
-        String sql = "DELETE FROM `cursada` WHERE `idAlumno`=? AND `idMateria`=?";
+    public void borrarCursada(Cursada c){
+        String sql = "DELETE FROM `cursada` WHERE `id_alumno`=? AND `id_materia`=?";
         
         try {
              
@@ -88,12 +90,11 @@ public class CursadaData {
             JOptionPane.showMessageDialog(null, "No se pudo eliminar calificacion");
         }
     } 
-         
-    public void buscarCalificacionAlumno(int id){
-        
+    
+    public void buscarCalificacionxMateria(int id){
         Cursada c = new Cursada();
         List<Cursada> cursada = new ArrayList<>();
-        String sql = "SELECT `calificacion` FROM `cursada` WHERE `idAlumno`=?"; 
+        String sql = "SELECT `nota` FROM `cursada` WHERE `id_materia`=?"; 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
@@ -101,32 +102,7 @@ public class CursadaData {
             
             while(rs.next()){
                 
-                    c.setCalificacion(rs.getInt("calificacion"));
-                  
-                    System.out.println(c.getCalificacion());
-                    
-                    cursada.add(c);
-              }  
-            ps.close();
-            
-        } catch (SQLException e) {
-            System.err.print(e.getMessage());
-            JOptionPane.showMessageDialog(null, "No se pudo obtener Calificaciones del alumno solicitado");
-        }
-    }
-    
-    public void buscarCalificacionMateria(int id){
-       Cursada c = new Cursada();
-        List<Cursada> cursada = new ArrayList<>();
-        String sql = "SELECT `calificacion` FROM `cursada` WHERE `idMateria`=?"; 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
-                
-                    c.setCalificacion(rs.getInt("calificacion"));
+                    c.setCalificacion(rs.getInt("nota"));
                   
                     System.out.println(c.getCalificacion());
                     
@@ -139,8 +115,58 @@ public class CursadaData {
             JOptionPane.showMessageDialog(null, "No se pudo obtener Calificaciones de la materia");
         }
     }
+     
+    public List<Cursada> bucarCursadaXAlumno(int id){
+        Cursada c= new Cursada();
+        Materia m = new Materia();
+        List<Cursada> lista= new ArrayList<>();
+        String sql="SELECT DISTINCT materia.nombre_materia FROM `cursada`, `materia` WHERE cursada.id_alumno=?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                m.setNombreMateria(rs.getString("nombre_materia"));
+                System.out.println(m.getNombreMateria());
+                       
+               lista.add(c);
+            }
+               ps.close();
+        }
+            
+        catch(SQLException e){
+            System.err.print(e.getMessage());
+           JOptionPane.showMessageDialog(null,"Error al buscar alumnos");
+        }
+        return lista; 
+    }   
     
-    
+    public List<Cursada> bucarAlumnoXCursada(int id){
+        Cursada c= new Cursada();
+        Alumno a = new Alumno();
+        List<Cursada> lista= new ArrayList<>();
+        String sql="SELECT DISTINCT alumno.nombre_alumno FROM `cursada`, `alumno` WHERE cursada.id_materia=?";
+          
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                a.setNombre(rs.getString("nombre_alumno"));
+                System.out.println(a.getNombre());
+
+                lista.add(c);
+            }
+                ps.close();
+        }
+            
+        catch(SQLException e){
+            //System.err.print(e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al buscar alumnos" + e.getMessage());
+        }
+        return lista; 
+    }   
 }
-    
-   

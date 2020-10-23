@@ -23,7 +23,7 @@ public class MateriaData {
     
     public void guardarMateria(Materia materia){
         try {
-            String sql = "INSERT INTO `materia`(`nombre`) VALUES (?)";
+            String sql = "INSERT INTO `materia`(`nombre_materia`) VALUES (?)";
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, materia.getNombreMateria());
             
@@ -46,24 +46,24 @@ public class MateriaData {
     
     public void actualizarMateria(Materia materia){
         try {
-            String sql = " UPDATE `materia` SET nombre=? WHERE idMateria=?";
+            String sql = " UPDATE `materia` SET nombre_materia=? WHERE id_materia=?";
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, materia.getNombreMateria());
             statement.setInt(2, materia.getIdMateria());
-            
+
             statement.executeUpdate();
-         
-        statement.close();
-        con.close();
+
+            statement.close();
+            con.close();
             
-        } catch (SQLException e) {
-            System.err.print(e.getMessage());
-            JOptionPane.showMessageDialog(null, " No se pudo buscar la materia");
+            } catch (SQLException e) {
+                System.err.print(e.getMessage());
+                JOptionPane.showMessageDialog(null, " No se pudo buscar la materia");
         }       
     }
     
     public void borrarMateria(int id){
-        String sql = "DELETE FROM materia WHERE idMateria=?";
+        String sql = "DELETE FROM materia WHERE id_materia=?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -78,7 +78,7 @@ public class MateriaData {
     
     public Materia buscarMateria(int id){
         Materia materia = new Materia();
-        String sql = "SELECT * FROM materia WHERE idMateria=?";
+        String sql = "SELECT * FROM materia WHERE id_materia=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
@@ -94,7 +94,7 @@ public class MateriaData {
             ps.close();
             
         } catch (SQLException e) {
-           System.err.print(e.getMessage());
+            System.err.print(e.getMessage());
             JOptionPane.showMessageDialog(null, " No se pudo encontrar la materia");
         }        
         return materia;       
@@ -110,8 +110,8 @@ public class MateriaData {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                materia.setIdMateria(rs.getInt("idMateria"));
-                materia.setNombreMateria(rs.getString("nombre"));
+                materia.setIdMateria(rs.getInt("id_materia"));
+                materia.setNombreMateria(rs.getString("nombre_materia"));
                 System.out.println(materia.getNombreMateria());
                 materias.add(materia);            
             }           
@@ -120,6 +120,5 @@ public class MateriaData {
             JOptionPane.showMessageDialog(null, "No se pudo listar las materias");
         }
         return materias;        
-    }
-    
+    }   
 }

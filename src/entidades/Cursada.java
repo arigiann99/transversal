@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package entidades;
 
-/**
- *
- * @author GIANELLI
- */
+
 public class Cursada {
     private int idCursada;
     private Alumno alumno;
@@ -39,8 +32,6 @@ public class Cursada {
         this.idCursada = idCursada;
     }
 
-    
-
     public Alumno getAlumno() {
         return alumno;
     }
@@ -63,9 +54,6 @@ public class Cursada {
 
     public void setCalificacion(double calificacion) {
         this.calificacion = calificacion;
-    }
-    
-    
-    
+    }   
 }
 
