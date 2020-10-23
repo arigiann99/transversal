@@ -25,7 +25,7 @@ public class TestUniversidad {
         Alumno malco = new Alumno("Malco Grosso", 152801, true);
         Alumno nela = new Alumno("Marianela Garacciolo", 152799, true);
         
-        ad.guardarAlumno(ariel); 
+        //ad.guardarAlumno(ariel); 
         //ad.guardarAlumno(malco); // funciona ok
         //ad.guardarAlumno(nela);
         
