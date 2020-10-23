@@ -69,22 +69,23 @@ public class TestUniversidad {
         CursadaData cd = new CursadaData(c);
         
         // CURSADA
-        //Cursada curso = new Cursada(ariel, mat, 9);
-        //Cursada curso2 = new Cursada(malco, web, 2);
-        
-        //cd.guardarCalificacion(curso2); // funciona ok 
+        Cursada curso = new Cursada(ariel, mat, 9);
+        Cursada curso2 = new Cursada(malco, web, 2);
+      
+      //  cd.guardarCalificacion(curso2); // funciona ok 
         //cd.guardarCalificacion(curso2);
         
         //cd.actualizarCalificacion(curso2); // funciona ok
         
         //cd.borrarCalificacion(curso2); //funciona ok
+       // cd.buscarCalificacionxMateria(2);
         
         //cd.buscarCalificacionAlumno(2); //funciona ok // buscar cant de materia x alumno
         //cd.buscarCalificacionMateria(15); // funciona ok
         
-        //cd.bucarCursadaXAlumno(2); // ingreso id de alumno y me lista las materias // funciona ok
+       // cd.bucarCursadaXAlumno(2); // ingreso id de alumno y me lista las materias // funciona ok
         
-        //cd.bucarAlumnoXCursada(2); // ingreso ed de la materia de la cual quiero listar los alumnos // funciona ok
+        cd.bucarAlumnoXCursada(2); // ingreso id de la materia de la cual quiero listar los alumnos // funciona ok
         
     }
     

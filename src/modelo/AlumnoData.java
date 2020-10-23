@@ -36,7 +36,7 @@ public class AlumnoData {
             } else {
                 JOptionPane.showMessageDialog(null, "No se pudo obtener el id del alumno");
             }
-        con.close();
+        statement.close();
             
         } catch (SQLException e) {
             System.err.print(e.getMessage());
@@ -57,7 +57,7 @@ public class AlumnoData {
                     
             statement.executeUpdate();
             
-        con.close();
+        statement.close();
             
         } catch (SQLException e) {
             System.err.print(e.getMessage());
