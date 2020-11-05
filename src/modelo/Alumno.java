@@ -1,5 +1,5 @@
 
-package entidades;
+package modelo;
 
 public class Alumno {
     private int idAlumno;

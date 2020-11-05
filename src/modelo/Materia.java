@@ -1,5 +1,5 @@
 
-package entidades;
+package modelo;
 
 public class Materia {
     private int idMateria;
