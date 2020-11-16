@@ -104,20 +104,21 @@ public class AlumnoData {
     }
     
     public List<Alumno> obtenerAlumnos(){
-        Alumno alumno = new Alumno();
         List<Alumno> alumnos = new ArrayList<>();
-        String sql = "SELECT * FROM alumno";
         
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            String sql = "SELECT * FROM alumno";
+            PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){             
+            Alumno alumno;
+            while(rs.next()){
+                alumno = new Alumno();
+                
                 alumno.setIdAlumno(rs.getInt("id_alumno"));
                 alumno.setNombre(rs.getString("nombre_alumno"));
                 alumno.setActivo(rs.getBoolean("activo"));
                 alumno.setLegajo(rs.getInt("legajo"));
-                System.out.println(alumno.getNombre()+ " " + alumno.getLegajo());
+                //System.out.println(alumno.getNombre()+ " " + alumno.getLegajo());
                 
                 alumnos.add(alumno);            
             }    
@@ -128,4 +129,6 @@ public class AlumnoData {
         }
         return alumnos;        
     }   
+    
+    
 }

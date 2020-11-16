@@ -15,15 +15,16 @@ import modelo.MateriaData;
  * @author GIANELLI
  */
 public class MateriaVista extends javax.swing.JInternalFrame {
-    private MateriaData md;
+    private MateriaData materiaData;
     private Conexion con;
+    
     /**
      * Creates new form MateriaVista
      */
     public MateriaVista() {
         initComponents();
         con = new Conexion("jdbc:mysql://localhost:3306/universidadg2","root","");
-        md = new MateriaData(con);
+        materiaData = new MateriaData(con);
     }
 
     /**
@@ -36,56 +37,78 @@ public class MateriaVista extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtIdM = new javax.swing.JTextField();
-        jtNombreM = new javax.swing.JTextField();
+        jTid = new javax.swing.JTextField();
+        jTnombre = new javax.swing.JTextField();
+        jBuscar = new javax.swing.JButton();
         jGuardar = new javax.swing.JButton();
         jBorrar = new javax.swing.JButton();
         jActualizar = new javax.swing.JButton();
         jLimpiar = new javax.swing.JButton();
-        jBuscar = new javax.swing.JButton();
 
         setClosable(true);
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 153, 255));
-        jLabel1.setText("<-- MATERIAS -->");
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabel1.setText(" FORMULARIO DE MATERIAS");
 
         jLabel2.setText("ID");
 
         jLabel3.setText("NOMBRE");
 
+        jTid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTidKeyPressed(evt);
+            }
+        });
+
+        jTnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTnombreKeyPressed(evt);
+            }
+        });
+
+        jBuscar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        jBuscar.setText("BUSCAR");
+        jBuscar.setEnabled(false);
+        jBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuscarActionPerformed(evt);
+            }
+        });
+
+        jGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         jGuardar.setText("GUARDAR");
+        jGuardar.setEnabled(false);
         jGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jGuardarActionPerformed(evt);
             }
         });
 
+        jBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrar.png"))); // NOI18N
         jBorrar.setText("BORRAR");
+        jBorrar.setEnabled(false);
         jBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBorrarActionPerformed(evt);
             }
         });
 
-        jActualizar.setText("ACTUALIZAR");
+        jActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizar.png"))); // NOI18N
+        jActualizar.setText(" ACTUALIZAR ");
+        jActualizar.setEnabled(false);
         jActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jActualizarActionPerformed(evt);
             }
         });
 
+        jLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/clean.png"))); // NOI18N
         jLimpiar.setText("LIMPIAR");
+        jLimpiar.setEnabled(false);
         jLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLimpiarActionPerformed(evt);
-            }
-        });
-
-        jBuscar.setText("BUSCAR");
-        jBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBuscarActionPerformed(evt);
             }
         });
 
@@ -93,108 +116,121 @@ public class MateriaVista extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(128, 128, 128))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(57, 57, 57)
-                                .addComponent(jtIdM, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBuscar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(26, 26, 26)
-                                .addComponent(jtNombreM, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(50, 50, 50)
+                                .addComponent(jTid, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(167, 167, 167))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jBorrar)
-                                .addGap(29, 29, 29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                                 .addComponent(jActualizar)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLimpiar)
-                                .addGap(11, 11, 11)))))
-                .addGap(29, 29, 29))
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jBuscar)
+                            .addComponent(jLimpiar))))
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(173, 173, 173))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(83, 83, 83)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jtIdM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jtNombreM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jGuardar)
-                            .addComponent(jBorrar)
-                            .addComponent(jActualizar)
-                            .addComponent(jLimpiar))
-                        .addGap(34, 34, 34))
+                            .addComponent(jTid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jBuscar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel1)
+                        .addGap(48, 48, 48)
+                        .addComponent(jBuscar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jGuardar)
+                    .addComponent(jBorrar)
+                    .addComponent(jActualizar)
+                    .addComponent(jLimpiar))
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+        int id = Integer.parseInt(jTid.getText());
+        Materia materia = materiaData.buscarMateria(id);
+        if (materia != null) {
+            jTid.setText(materia.getIdMateria() + "");
+            jTnombre.setText(materia.getNombreMateria());
+        }
+    }//GEN-LAST:event_jBuscarActionPerformed
+
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
-        String nombre = jtNombreM.getText();
+        String nombre = jTnombre.getText();
         
         Materia materia = new Materia(nombre);
-        md.guardarMateria(materia);
+        materiaData.guardarMateria(materia);
         
-        jtIdM.setText(materia.getIdMateria()+"");   
+        jTid.setText(materia.getIdMateria()+"");
+        
+        JOptionPane.showMessageDialog(this, "Se Guardaron Datos Correctamente");
+        //jLimpiarActionPerformed(evt);
     }//GEN-LAST:event_jGuardarActionPerformed
 
-    private void jBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBorrarActionPerformed
-       int id = Integer.parseInt(jtIdM.getText());
-       if(jtIdM!=null){
-            md.borrarMateria(id);
-            JOptionPane.showMessageDialog(null, "Se borro correctamente");
-          
-       }
-    }//GEN-LAST:event_jBorrarActionPerformed
-
     private void jActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActualizarActionPerformed
-        if(jtIdM.getText() != null){
-            int id = Integer.parseInt(jtIdM.getText());
-            String nombre = jtNombreM.getText();        
-            Materia materia = new Materia(nombre,id);
-            md.actualizarMateria(materia);
+       if(jTid.getText()!=null){
+            int id = Integer.parseInt(jTid.getText());
+            String nombre = jTnombre.getText();
+            Materia materia = new Materia();
+            materiaData.actualizarMateria(materia);
+            JOptionPane.showMessageDialog(this, "Se actualizaron los datos!!");
+            jLimpiarActionPerformed(evt);
+
         }
     }//GEN-LAST:event_jActualizarActionPerformed
 
     private void jLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimpiarActionPerformed
-        jtIdM.setText("");
-        jtNombreM.setText("");
+        jTid.setText("");
+        jTnombre.setText("");
     }//GEN-LAST:event_jLimpiarActionPerformed
 
-    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-        int id = Integer.parseInt(jtIdM.getText());
-        Materia materia = md.buscarMateria(id);
-        if(materia!=null){
-            jtIdM.setText(materia.getIdMateria()+"");
-            jtNombreM.setText(materia.getNombreMateria());
-        }
-    }//GEN-LAST:event_jBuscarActionPerformed
+    private void jTidKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidKeyPressed
+        jBuscar.setEnabled(true);
+        jBorrar.setEnabled(true);
+        jLimpiar.setEnabled(true);
+    }//GEN-LAST:event_jTidKeyPressed
+
+    private void jTnombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnombreKeyPressed
+       jGuardar.setEnabled(true);
+       jActualizar.setEnabled(true);
+    }//GEN-LAST:event_jTnombreKeyPressed
+
+    private void jBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBorrarActionPerformed
+        int id = Integer.parseInt(jTid.getText());
+        materiaData.borrarMateria(id);
+        JOptionPane.showMessageDialog(this, "Se borro la Materia!!");
+        jLimpiarActionPerformed(evt);
+    }//GEN-LAST:event_jBorrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -206,7 +242,7 @@ public class MateriaVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jLimpiar;
-    private javax.swing.JTextField jtIdM;
-    private javax.swing.JTextField jtNombreM;
+    private javax.swing.JTextField jTid;
+    private javax.swing.JTextField jTnombre;
     // End of variables declaration//GEN-END:variables
 }

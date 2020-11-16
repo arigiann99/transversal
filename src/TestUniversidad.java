@@ -14,9 +14,9 @@ public class TestUniversidad {
     
     public static void main(String[] args) {
        
-        //Conexion c = new Conexion();
-        
+        Conexion c = new Conexion("jdbc:mysql://localhost:3306/universidadg2", "root", "");
         /*
+        
         //ALUMNO DATA
         AlumnoData ad = new AlumnoData(c);
         
@@ -29,7 +29,7 @@ public class TestUniversidad {
         //ad.guardarAlumno(malco); // funciona ok
         //ad.guardarAlumno(nela);
         
-        malco.setIdAlumno(2);
+        //malco.setIdAlumno(2);
         //ariel.setIdAlumno(1);
         //ad.actualizarAlumno(ariel); // funciona ok
         
@@ -40,8 +40,8 @@ public class TestUniversidad {
         //ad.obtenerAlumnos(); // funciona ok
         
         
-        
-        // MATERIA DATA
+        */
+         //MATERIA DATA
         MateriaData md = new MateriaData(c);
         
         // MATERIA
@@ -62,9 +62,10 @@ public class TestUniversidad {
         
         //md.buscarMateria(3); // funciona ok
         
-        //md.obtenerMaterias(); // funciona ok
+        System.out.println(md.obtenerMaterias());
+        md.obtenerMaterias(); // funciona ok
         
-       
+       /*
         // CURSADA DATA
         CursadaData cd = new CursadaData(c);
         
@@ -73,7 +74,7 @@ public class TestUniversidad {
         Cursada curso2 = new Cursada(malco, web, 2);
       
       //  cd.guardarCalificacion(curso2); // funciona ok 
-        cd.guardarCursada(curso2);
+        //cd.guardarCursada(curso2);
         
         //cd.actualizarCalificacion(curso2); // funciona ok
         
@@ -86,7 +87,8 @@ public class TestUniversidad {
        // cd.bucarCursadaXAlumno(2); // ingreso id de alumno y me lista las materias // funciona ok
         
         //cd.bucarAlumnoXCursada(2); // ingreso id de la materia de la cual quiero listar los alumnos // funciona ok
-        */
+        cd.obtenerCursadas();
+     */   
     }
     
 }

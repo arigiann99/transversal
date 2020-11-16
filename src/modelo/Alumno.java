@@ -55,5 +55,12 @@ public class Alumno {
         this.legajo = legajo;
     }
 
+    @Override
+    public String toString() {
+        return idAlumno + " - " + nombre;
+    }
+    
+    
+
     
 }

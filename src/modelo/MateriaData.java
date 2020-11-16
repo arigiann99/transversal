@@ -100,24 +100,23 @@ public class MateriaData {
     }
     
     public List<Materia> obtenerMaterias(){
-        Materia materia = new Materia();
-        List<Materia> materias = new ArrayList<>();
-        String sql = "SELECT * FROM materia";
-        
+        List<Materia> materias = new ArrayList<Materia>(); //para el listado
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = ps.executeQuery();
-            
+            String sql = "Select * from materia";   
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();  //conjunto registros
+            Materia materia;
             while(rs.next()){
-                materia.setIdMateria(rs.getInt("id_materia"));
-                materia.setNombreMateria(rs.getString("nombre_materia"));
-                System.out.println(materia.getNombreMateria());
-                materias.add(materia);            
-            }           
-        } catch (SQLException e) {
-            System.err.print(e.getMessage());
-            JOptionPane.showMessageDialog(null, "No se pudo listar las materias");
+               materia = new Materia();
+               materia.setIdMateria(rs.getInt("id_materia"));
+               materia.setNombreMateria(rs.getString("nombre_materia"));
+               materias.add(materia);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            System.err.print(ex.getMessage());
+            JOptionPane.showMessageDialog(null, " No se pudo encontrar la materia");
         }
-        return materias;        
-    }   
+        return materias;
+    }
 }
