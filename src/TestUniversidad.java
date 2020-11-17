@@ -63,20 +63,20 @@ public class TestUniversidad {
         //md.buscarMateria(3); // funciona ok
         
         System.out.println(md.obtenerMaterias());
-        md.obtenerMaterias(); // funciona ok
+        //md.obtenerMaterias(); // funciona ok
         
-       /*
+       
         // CURSADA DATA
         CursadaData cd = new CursadaData(c);
         
         // CURSADA
-        Cursada curso = new Cursada(ariel, mat, 9);
-        Cursada curso2 = new Cursada(malco, web, 2);
+        //Cursada curso = new Cursada(ariel, mat, 9);
+        //Cursada curso2 = new Cursada(malco, web, 2);
       
       //  cd.guardarCalificacion(curso2); // funciona ok 
         //cd.guardarCursada(curso2);
         
-        //cd.actualizarCalificacion(curso2); // funciona ok
+        //cd.actualizarNotaCursada(20,6,8); // funciona ok
         
         //cd.borrarCalificacion(curso2); //funciona ok
        // cd.buscarCalificacionxMateria(2);
@@ -87,8 +87,8 @@ public class TestUniversidad {
        // cd.bucarCursadaXAlumno(2); // ingreso id de alumno y me lista las materias // funciona ok
         
         //cd.bucarAlumnoXCursada(2); // ingreso id de la materia de la cual quiero listar los alumnos // funciona ok
-        cd.obtenerCursadas();
-     */   
+        //cd.obtenerCursadas();
+        
     }
     
 }

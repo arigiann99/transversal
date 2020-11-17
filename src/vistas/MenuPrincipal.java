@@ -41,7 +41,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jItemLista = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setExtendedState(6);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -196,11 +195,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        NotasVista nv = new NotasVista();
-        escritorio.add(nv);
-        escritorio.moveToFront(nv);
+        NotasVista nota = new NotasVista();
+        nota.setVisible(true);
+        escritorio.add(nota);
+        escritorio.moveToFront(nota);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**

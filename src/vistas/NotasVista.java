@@ -25,6 +25,7 @@ public class NotasVista extends javax.swing.JInternalFrame {
     //private ArrayList<Materia> listaMaterias;
     private ArrayList<Alumno> listaAlumnos;
     private Conexion con;
+
     /**
      * Creates new form NotasVista
      */
@@ -32,8 +33,18 @@ public class NotasVista extends javax.swing.JInternalFrame {
         initComponents();
         con = new Conexion("jdbc:mysql://localhost:3306/universidadg2", "root", "");
         modelo = new DefaultTableModel();
+
+//        cursadaData = new CursadaData(con);
+//        listaCursada = (ArrayList) cursadaData.obtenerCursadas();
+//
+//        materiaData = new MateriaData(con);
+//        listaMaterias = (ArrayList)materiaData.obtenerMaterias();
         alumnoData = new AlumnoData(con);
         listaAlumnos = (ArrayList) alumnoData.obtenerAlumnos();
+
+        cargarAlumnos();
+        armarCabeceraTabla();
+        cargarDatosInscriptas();
     }
 
     /**
@@ -56,6 +67,12 @@ public class NotasVista extends javax.swing.JInternalFrame {
 
         jLabel2.setText("ALUMNO");
 
+        comboALumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboALumnoActionPerformed(evt);
+            }
+        });
+
         tmaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -69,6 +86,7 @@ public class NotasVista extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tmaterias);
 
+        jGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salvar.png"))); // NOI18N
         jGuardar.setText("GUARDAR");
         jGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +94,13 @@ public class NotasVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salida.png"))); // NOI18N
         jButton2.setText("SALIR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,11 +124,11 @@ public class NotasVista extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
+                .addGap(101, 101, 101)
                 .addComponent(jGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
                 .addComponent(jButton2)
-                .addGap(121, 121, 121))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,37 +145,49 @@ public class NotasVista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jGuardar)
                     .addComponent(jButton2))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
+ 
         int filaSelect = tmaterias.getSelectedRow();
-           if(filaSelect != -1){
-               Alumno a = (Alumno)comboALumno.getSelectedItem();
-               if(a!=null){
-                   
-                   int idMateria = (Integer)modelo.getValueAt(filaSelect, 0);
-                   
-                   
-               
-                   cursadaData = new CursadaData(con);
-                   cursadaData.borrarCursadaDeUnaMateriaDeunAlumno(a.getIdAlumno(), idMateria);
-                   borrarFilasTablas();
-               }
-           }
-           JOptionPane.showMessageDialog(this, "Se Anulo Inscripcion Correctamente");
-                                        
+        int columnaSelect = tmaterias.getSelectedColumn();
+        if (filaSelect != -1) {
+            Alumno a = (Alumno) comboALumno.getSelectedItem();
+            if (a != null) {
+
+                int idMateria = (Integer) modelo.getValueAt(filaSelect, 0);
+                
+                int nota =  Integer.valueOf(modelo.getValueAt(filaSelect, 2).toString());
+
+                cursadaData = new CursadaData(con);
+                cursadaData.actualizarNotaCursada(nota, a.getIdAlumno(), idMateria);
+                borrarFilasTablas();
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Se Modifico Calificacion !!");
+
     }//GEN-LAST:event_jGuardarActionPerformed
 
-private void cargarAlumnos() {
-        for(Alumno item:listaAlumnos){
-            comboALumno.addItem(item);         
-        }     
+    private void comboALumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboALumnoActionPerformed
+        // TODO add your handling code here:
+        cargarDatosInscriptas();
+    }//GEN-LAST:event_comboALumnoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cargarAlumnos() {
+        for (Alumno item : listaAlumnos) {
+            comboALumno.addItem(item);
+        }
     }
-private void armarCabeceraTabla() {
+
+    private void armarCabeceraTabla() {
         ArrayList<Object> columns = new ArrayList<>();
         columns.add("Id");
         columns.add("Nombre");
@@ -161,24 +197,27 @@ private void armarCabeceraTabla() {
         });
         tmaterias.setModel(modelo);
     }
-public void borrarFilasTablas() {
+
+    public void borrarFilasTablas() {
         int a = modelo.getRowCount() - 1; // -1 indice de ultima fila.
         for (int i = a; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
-private void cargarDatosInscriptas() {
+
+    private void cargarDatosInscriptas() {
         borrarFilasTablas();
         cursadaData = new CursadaData(con);
-        Alumno select = (Alumno)comboALumno.getSelectedItem();
-        List<Materia> lista = cursadaData.obtenerMateriasCursadas(select.getIdAlumno());
-        
-        for(Materia m:lista){
-            modelo.addRow(new Object[]{m.getIdMateria(),m.getNombreMateria()});
+        Cursada c = new Cursada();
+        Alumno select = (Alumno) comboALumno.getSelectedItem();
+        List<Cursada> lista = cursadaData.obtenerCursadasXAlumno(select.getIdAlumno());
+
+        for (Cursada m : lista) {
+            modelo.addRow(new Object[]{m.getMateria().getIdMateria(),m.getMateria().getNombreMateria(),m.getCalificacion()});
         }
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Alumno> comboALumno;
     private javax.swing.JButton jButton2;
