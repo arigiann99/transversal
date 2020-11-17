@@ -42,7 +42,7 @@
                               <Component id="jGuardar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jBorrar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="12" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jActualizar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
@@ -53,7 +53,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -85,12 +85,12 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTnombre" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLimpiar" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
@@ -144,7 +144,7 @@
     <Component class="javax.swing.JButton" name="jGuardar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/imagenes/guardar.png"/>
+          <Image iconType="3" name="/imagenes/salvar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="GUARDAR"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -156,7 +156,7 @@
     <Component class="javax.swing.JButton" name="jBorrar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/imagenes/borrar.png"/>
+          <Image iconType="3" name="/imagenes/eliminar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="BORRAR"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -168,7 +168,7 @@
     <Component class="javax.swing.JButton" name="jActualizar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/imagenes/actualizar.png"/>
+          <Image iconType="3" name="/imagenes/recargar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value=" ACTUALIZAR "/>
         <Property name="enabled" type="boolean" value="false"/>

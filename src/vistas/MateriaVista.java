@@ -76,7 +76,7 @@ public class MateriaVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
+        jGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salvar.png"))); // NOI18N
         jGuardar.setText("GUARDAR");
         jGuardar.setEnabled(false);
         jGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +85,7 @@ public class MateriaVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrar.png"))); // NOI18N
+        jBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         jBorrar.setText("BORRAR");
         jBorrar.setEnabled(false);
         jBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +94,7 @@ public class MateriaVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizar.png"))); // NOI18N
+        jActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/recargar.png"))); // NOI18N
         jActualizar.setText(" ACTUALIZAR ");
         jActualizar.setEnabled(false);
         jActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -134,13 +134,13 @@ public class MateriaVista extends javax.swing.JInternalFrame {
                                 .addComponent(jGuardar)
                                 .addGap(18, 18, 18)
                                 .addComponent(jBorrar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jActualizar)
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jBuscar)
                             .addComponent(jLimpiar))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,12 +164,12 @@ public class MateriaVista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jGuardar)
                     .addComponent(jBorrar)
                     .addComponent(jActualizar)
-                    .addComponent(jLimpiar))
+                    .addComponent(jLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
 

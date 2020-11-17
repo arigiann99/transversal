@@ -78,9 +78,8 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salvar (1).png"))); // NOI18N
+        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salvar.png"))); // NOI18N
         jbGuardar.setText("GUARDAR");
-        jbGuardar.setEnabled(false);
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);

@@ -57,7 +57,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Archivo");
 
         jItemSalir.setBackground(new java.awt.Color(0, 0, 0));
-        jItemSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salida.png"))); // NOI18N
         jItemSalir.setText("Salir");
         jItemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +69,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Alumnos");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lista.png"))); // NOI18N
         jMenuItem1.setText("Formulario de Alumnos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +81,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Materias");
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lista.png"))); // NOI18N
         jMenuItem2.setText("Formulario de Materias");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
